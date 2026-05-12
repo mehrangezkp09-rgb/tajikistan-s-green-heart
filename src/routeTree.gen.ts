@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PollutionRouteImport } from './routes/pollution'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as DeforestationRouteImport } from './routes/deforestation'
+import { Route as AnimalsRouteImport } from './routes/animals'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PollutionRoute = PollutionRouteImport.update({
+  id: '/pollution',
+  path: '/pollution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeforestationRoute = DeforestationRouteImport.update({
+  id: '/deforestation',
+  path: '/deforestation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnimalsRoute = AnimalsRouteImport.update({
+  id: '/animals',
+  path: '/animals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,96 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/animals': typeof AnimalsRoute
+  '/deforestation': typeof DeforestationRoute
+  '/help': typeof HelpRoute
+  '/news': typeof NewsRoute
+  '/pollution': typeof PollutionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/animals': typeof AnimalsRoute
+  '/deforestation': typeof DeforestationRoute
+  '/help': typeof HelpRoute
+  '/news': typeof NewsRoute
+  '/pollution': typeof PollutionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/animals': typeof AnimalsRoute
+  '/deforestation': typeof DeforestationRoute
+  '/help': typeof HelpRoute
+  '/news': typeof NewsRoute
+  '/pollution': typeof PollutionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/animals'
+    | '/deforestation'
+    | '/help'
+    | '/news'
+    | '/pollution'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/animals' | '/deforestation' | '/help' | '/news' | '/pollution'
+  id:
+    | '__root__'
+    | '/'
+    | '/animals'
+    | '/deforestation'
+    | '/help'
+    | '/news'
+    | '/pollution'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnimalsRoute: typeof AnimalsRoute
+  DeforestationRoute: typeof DeforestationRoute
+  HelpRoute: typeof HelpRoute
+  NewsRoute: typeof NewsRoute
+  PollutionRoute: typeof PollutionRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/pollution': {
+      id: '/pollution'
+      path: '/pollution'
+      fullPath: '/pollution'
+      preLoaderRoute: typeof PollutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deforestation': {
+      id: '/deforestation'
+      path: '/deforestation'
+      fullPath: '/deforestation'
+      preLoaderRoute: typeof DeforestationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/animals': {
+      id: '/animals'
+      path: '/animals'
+      fullPath: '/animals'
+      preLoaderRoute: typeof AnimalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +151,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnimalsRoute: AnimalsRoute,
+  DeforestationRoute: DeforestationRoute,
+  HelpRoute: HelpRoute,
+  NewsRoute: NewsRoute,
+  PollutionRoute: PollutionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
